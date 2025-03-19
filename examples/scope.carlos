@@ -1,0 +1,9 @@
+let a = 1024;
+function f() {
+  const b = true;
+}
+function g(): string {
+  let b = "hi" + "ho";
+  return b;
+}
+print(a + a);
