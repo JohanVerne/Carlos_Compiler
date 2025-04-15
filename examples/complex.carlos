@@ -1,0 +1,168 @@
+// Complex Carlos program to test lexer and parser
+
+// Global constant
+const languageName = "Carlos";
+
+// Structure declaration using 'struct' and fields
+struct Vector {
+  x: float
+  y: float
+  label: string
+}
+
+// Function that acts as a constructor for Vector
+function newVector(x: float, y: float, label: string): Vector {
+  // Create and return a new Vector instance
+  return Vector(x, y, label);
+}
+
+// Compute the magnitude (length) of a Vector using arithmetic and function calls.
+function magnitude(v: Vector): float {
+  return sqrt(v.x * v.x + v.y * v.y);
+}
+
+// Function to scale a vector by a factor and return a new instance
+function scaleVector(v: Vector, factor: float): Vector {
+  let newX = v.x * factor;
+  let newY = v.y * factor;
+  return Vector(newX, newY, v.label);
+}
+
+// Function that demonstrates the use of optionals
+function testOptional(flag: boolean): int? {
+  if flag {
+    // Create an optional containing 42
+    return some 42;
+  }
+  else {
+    // Return an empty optional for type int?
+    return no int;
+  }
+}
+
+// Function to process an array of integers using a for-range loop and the '#' operator for array length
+function processArray(a: [int]): int {
+  let sum = 0;
+  // '0 ..<' loop: iterate from 0 inclusive to the length of the array exclusive
+  for i in 0 ..< #a {
+    sum = sum + a[i];
+  }
+  return sum;
+}
+
+// Function demonstrating a conditional (ternary) operator within an expression
+function stringFun(s: string): string {
+  let result = "";
+  // Convert the string to codepoints then create a new string based on parity of the codepoint values.
+  let cp = codepoints(s);
+  // Iterate over the codepoints with a for-each loop on a collection
+  for cpVal in cp {
+    // Using the conditional operator: if cpVal modulo 2 equals 0, append "E", else "O"
+    result = result + ( (cpVal % 2 == 0) ? "E" : "O" );
+  }
+  return result;
+}
+
+// Function using various logical operators (&&, ||, !) and comparisons
+function complexCondition(a: int, b: int): boolean {
+  if (a < b && a != 0) {
+    return true;
+  }
+  else if (a == b) {
+    return false;
+  }
+  else {
+    // Use the logical not operator '!'
+    return !false;
+  }
+}
+
+// Demonstrate control structures: while loop and repeat loop.
+function loopDemo(n: int): void {
+  let counter = n;
+  // While loop with decrement operator (--) on mutable variable 'counter'
+  while counter > 0 {
+    print("Counter: " + counter);
+    counter--;
+  }
+  // Repeat loop that executes a fixed number of times
+  repeat 3 {
+    print("Repeat loop iteration");
+  }
+}
+
+// Function to illustrate different range iterations using the 'for' loop with range operators.
+function rangeDemo(start: int, end: int): void {
+  // Through-range loop using "..." (inclusive range)
+  for i in start ... end {
+    if i % 2 == 0 {
+      print("Even: " + i);
+    }
+    else {
+      print("Odd: " + i);
+    }
+  }
+}
+
+// Function to show an if statement with a single return statement.
+function branchDemo(x: int): int {
+  if x > 100 {
+    return x - 100;
+  }
+  return x + 100;
+}
+
+// Function that uses break within a for-each loop.
+function breakDemo(arr: [int]): int {
+  let total = 0;
+  for x in arr {
+    if x > 50 {
+      break;
+    }
+    total = total + x;
+  }
+  return total;
+}
+
+// Demonstrate bitwise operations and shifting operators
+function bitwiseDemo(x: int, y: int): int {
+  // Uses <<, >>, &, |, ^ in one expression. Parentheses ensure proper precedence.
+  return ((x << 1) + (y >> 1)) & (x ^ y) | (x & y);
+}
+
+// Main block: begins a new scope with its own block.
+{
+  // Print a greeting with the global constant.
+  print("Testing language: " + languageName);
+  
+  // Create a new Vector and test functions operating on it.
+  let vec = newVector(3.0, 4.0, "A");
+  print("Vector magnitude: " + magnitude(vec));
+  
+  let scaled = scaleVector(vec, 2.5);
+  print("Scaled vector magnitude: " + magnitude(scaled));
+  
+  // Test optionals using the '??' operator to unwrap with a default value.
+  let opt = testOptional(true);
+  print("Optional value: " + (opt ?? -1));
+  
+  // Process an array literal and output its sum.
+  let arrSum = processArray([10, 20, 30, 40]);
+  print("Sum of array: " + arrSum);
+  
+  // Use the string function with Unicode characters.
+  print(stringFun("Hello, 世界"));
+  
+  // Demonstrate loops.
+  loopDemo(5);
+  rangeDemo(1, 10);
+  
+  // Test branch function.
+  print("Branch demo: " + branchDemo(50));
+  
+  // Test the break statement in a loop.
+  print("Break demo: " + breakDemo([5, 10, 55, 20]));
+  
+  // Display result from bitwise operations.
+  print("Bitwise demo: " + bitwiseDemo(12, 5));
+}

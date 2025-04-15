@@ -5,7 +5,7 @@ regex_expressions = [
     # comments
     (r"\/\/.*", "COMMENTS"),
     # function
-    (r"function", "FUNCTION"),
+    (r"function\b", "FUNCTION"),
     # left parentheses
     (r"\(", "LPAREN"),
     # right parentheses
@@ -21,25 +21,29 @@ regex_expressions = [
     # arrow
     (r"\-\>", "ARROW"),
     # any
-    (r"any", "ANY"),
+    (r"any\b", "ANY"),
     # left braces
     (r"\{", "LBRACE"),
     # right braces
     (r"\}", "RBRACE"),
     # return
-    (r"return", "RETURN"),
+    (r"return\b", "RETURN"),
     # slash
     (r"\/", "DIVISION"),
     # print
-    (r"print", "PRINT"),
+    (r"print\b", "PRINT"),
     # float literals
     (r"[-]?[0-9]*[.]?[0-9]+?[eE]?[-+]?[0-9]*?", "FLOAT_LITERAL"),
     # int
-    (r"int", "INT"),
+    (r"int\b", "INT"),
     # integer literals
     (r"[0-9]+", "INTEGER_LITERAL"),
     # float
-    (r"float", "FLOAT"),
+    (r"float\b", "FLOAT"),
+    # increment
+    (r"\+\+", "INCREMENT"),
+    # decrement
+    (r"--", "DECREMENT"),
     # plus
     (r"\+", "PLUS"),
     # minus
@@ -65,59 +69,58 @@ regex_expressions = [
     # modulo
     (r"\%", "MODULO"),
     # string
-    (r"string", "STRING"),
+    (r"string\b", "STRING"),
     # string literals
     (r'\"(?:\\.|[^"\\])*\"', "STRING_LITERAL"),
-    # let
-    (r"let", "LET"),
-    # less than
-    (r"\<", "LESS_THAN"),
-    # greater than
-    (r"\>", "GREATER_THAN"),
     # less than or equal to
     (r"\<\=", "LESS_THAN_EQUAL"),
     # greater than or equal to
     (r"\>\=", "GREATER_THAN_EQUAL"),
+    (r"\<\<", "LEFT_SHIFT"),
+    # right shift
+    (r"\>\>", "RIGHT_SHIFT"),
+    # less than
+    (r"\<", "LESS_THAN"),
+    # greater than
+    (r"\>", "GREATER_THAN"),
+    # let
+    (r"let\b", "LET"),
     # if
-    (r"if", "IF"),
+    (r"if\b", "IF"),
     # else
-    (r"else", "ELSE"),
+    (r"else\b", "ELSE"),
     # const
-    (r"const", "CONST"),
+    (r"const\b", "CONST"),
     # random
-    (r"random", "RANDOM"),
+    (r"random\b", "RANDOM"),
     # left brackets
     (r"\[", "LBRACKET"),
     # right brackets
     (r"\]", "RBRACKET"),
     # repeat
-    (r"repeat", "REPEAT"),
+    (r"repeat\b", "REPEAT"),
     # no
-    (r"no", "NO"),
+    (r"no\b", "NO"),
     # struct
-    (r"struct", "STRUCT"),
+    (r"struct\b", "STRUCT"),
     # some
-    (r"some", "SOME"),
+    (r"some\b", "SOME"),
     # for
-    (r"for", "FOR"),
+    (r"for\b", "FOR"),
     # in
-    (r"in", "IN"),
+    (r"in\b", "IN"),
     # boolean
-    (r"boolean", "BOOLEAN"),
+    (r"boolean\b", "BOOLEAN"),
     # true
-    (r"true", "TRUE"),
+    (r"true\b", "TRUE"),
     # false
-    (r"false", "FALSE"),
+    (r"false\b", "FALSE"),
     # void
-    (r"void", "VOID"),
-    # increment
-    (r"\+\+", "INCREMENT"),
-    # decrement
-    (r"--", "DECREMENT"),
+    (r"void\b", "VOID"),
     # break
-    (r"break", "BREAK"),
+    (r"break\b", "BREAK"),
     # while
-    (r"while", "WHILE"),
+    (r"while\b", "WHILE"),
     # dot
     (r"\.", "DOT"),
     # length
@@ -127,37 +130,34 @@ regex_expressions = [
     # not
     (r"\!", "NOT"),
     # left shift
-    (r"\<\<", "LEFT_SHIFT"),
-    # right shift
-    (r"\>\>", "RIGHT_SHIFT"),
+    # logic or
+    (r"\|\|", "LOGICAL_OR"),
+    # logic and
+    (r"\&\&", "LOGICAL_AND"),
     # bitwise and
     (r"\&", "BITWISE_AND"),
     # bitwise or
     (r"\|", "BITWISE_OR"),
     # bitwise xor
     (r"\^", "BITWISE_XOR"),
-    # logic or
-    (r"\|\|", "LOGICAL_OR"),
-    # logic and
-    (r"\&\&", "LOGICAL_AND"),
     # codepoints
-    (r"codepoints", "CODEPOINTS"),
+    (r"codepoints\b", "CODEPOINTS"),
     # bytes
-    (r"bytes", "BYTES"),
+    (r"bytes\b", "BYTES"),
     # pi
     (r"\π", "PI"),
     # square root
-    (r"sqrt", "SQUARE_ROOT"),
+    (r"sqrt\b", "SQRT"),
     # sinus
-    (r"sin", "SIN"),
+    (r"sin\b", "SIN"),
     # cosinus
-    (r"cos", "COS"),
+    (r"cos\b", "COS"),
     # exponenential
-    (r"exp", "EXP"),
+    (r"exp\b", "EXP"),
     # natural log
-    (r"ln", "LN"),
+    (r"ln\b", "LN"),
     # hypothenuse
-    (r"hypot", "HYPOT"),
+    (r"hypot\b", "HYPOT"),
     # Identifier
     (r"[a-zA-Z_][a-zA-Z0-9_]*", "IDENTIFIER"),
     # # Whitespace

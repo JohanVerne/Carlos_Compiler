@@ -125,6 +125,10 @@ class Parser:
             stdlib_call = self.parse_stdlib()
             self.expect("SEMICOLON")
             return stdlib_call
+        elif self.show_next().tag == "LBRACE":
+            # Handle standalone blocks
+            return self.parse_block()
+
         else:
             expr = self.parse_exp()
             if self.show_next().tag in ["INCREMENT", "DECREMENT"]:
@@ -297,6 +301,8 @@ class Parser:
         self.expect("LBRACE")
         statements = []
         while self.show_next().tag != "RBRACE":
+            if self.show_next().tag == "COMMENTS":
+                self.accept()
             statements.append(self.parse_statement())
         self.expect("RBRACE")
         return Block(statements)
@@ -452,6 +458,21 @@ class Parser:
             expr = self.parse_exp()  # Parse the nested expression
             self.expect("RPAREN")  # Ensure the closing parenthesis is present
             return expr
+
+        elif self.show_next().tag in [
+            "SQRT",
+            "SIN",
+            "COS",
+            "EXP",
+            "LN",
+            "HYPOT",
+            "RANDOM",
+            "PRINT",
+            "CODEPOINTS",
+            "BYTES",
+            "PI",
+        ]:
+            return self.parse_stdlib()
 
         elif self.show_next().tag == "IDENTIFIER":
             identifier = Identifier(self.accept().value)

@@ -15,7 +15,6 @@ class LexExemples:
     def lex_files_in_directory(self, directory):
         output_directory = os.path.join(directory, "../Lexer/examples_lexed")
         os.makedirs(output_directory, exist_ok=True)
-        print(os.listdir("."))
         for filename in os.listdir(directory):
             if filename.endswith(".carlos"):
                 filepath = os.path.join(directory, filename)
