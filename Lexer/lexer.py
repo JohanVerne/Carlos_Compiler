@@ -12,8 +12,14 @@ regex_expressions = [
     (r"\)", "RPAREN"),
     # colon
     (r"\:", "COLON"),
+    # Inclusive range
+    (r"\.\.\.", "INCLUSIVE_RANGE"),
+    # Exclusive range
+    (r"\.\.<", "EXCLUSIVE_RANGE"),
     # semicolon
     (r"\;", "SEMICOLON"),
+    # arrow
+    (r"\-\>", "ARROW"),
     # any
     (r"any", "ANY"),
     # left braces
@@ -27,7 +33,7 @@ regex_expressions = [
     # print
     (r"print", "PRINT"),
     # float literals
-    (r"[-]?[0-9]*[.]?[0-9]+?[e]?[-]?[0-9]*?", "FLOAT_LITERAL"),
+    (r"[-]?[0-9]*[.]?[0-9]+?[eE]?[-+]?[0-9]*?", "FLOAT_LITERAL"),
     # int
     (r"int", "INT"),
     # integer literals
@@ -61,7 +67,7 @@ regex_expressions = [
     # string
     (r"string", "STRING"),
     # string literals
-    (r'"(?:\\.|[^"\\])*"', "STRING_LITERAL"),
+    (r'\"(?:\\.|[^"\\])*\"', "STRING_LITERAL"),
     # let
     (r"let", "LET"),
     # less than
@@ -202,7 +208,8 @@ class Lexer:
                     print("No match detected on line and position:")
                     print(line[position:])
                     sys.exit(1)
-
+        # Append EOF token
+        self.lexems.append(Lexem("EOF", "", [lineNumber + 1, 0]))
         return self.lexems
 
 

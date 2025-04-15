@@ -1,0 +1,96 @@
+Program
+  body:
+    TypeDecl
+      identifier:
+        'Point'
+      fields:
+        identifier:
+          'x'
+        type:
+          type:
+            'primitive'
+          name:
+            'float'
+
+        identifier:
+          'y'
+        type:
+          type:
+            'primitive'
+          name:
+            'float'
+
+    VarDecl
+      decl_statement:
+        'CONST'
+      identifier:
+        'triangle'
+      value:
+        Call
+          callee:
+            'array'
+          arguments:
+            Call
+              callee:
+                Identifier
+                  name:
+                    'Point'
+              arguments:
+                Literal
+                  value:
+                    '1.0'
+
+                Literal
+                  value:
+                    '2.0'
+
+            Call
+              callee:
+                Identifier
+                  name:
+                    'Point'
+              arguments:
+                Literal
+                  value:
+                    '3.0'
+
+                Literal
+                  value:
+                    '5.0'
+
+            Call
+              callee:
+                Identifier
+                  name:
+                    'Point'
+              arguments:
+                Literal
+                  value:
+                    '-3.0'
+
+                Literal
+                  value:
+                    '8.0'
+
+    LoopStmt
+      loop_type:
+        'for'
+      condition:
+        id:
+          'p'
+        iterable:
+          Identifier
+            name:
+              'triangle'
+        range_end:
+          None
+      body:
+        Block
+          statements:
+            Call
+              callee:
+                'print'
+              arguments:
+                Identifier
+                  name:
+                    'p'

@@ -1,0 +1,27 @@
+Program
+  body:
+    LoopStmt
+      loop_type:
+        'repeat'
+      condition:
+        BinaryOp
+          lhs:
+            Literal
+              value:
+                '5'
+          op:
+            'MULTIPLICATION'
+          rhs:
+            Literal
+              value:
+                '2'
+      body:
+        Block
+          statements:
+            Call
+              callee:
+                'print'
+              arguments:
+                Literal
+                  value:
+                    '"Hi"'

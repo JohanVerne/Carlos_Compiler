@@ -1,0 +1,9 @@
+Program
+  body:
+    Call
+      callee:
+        'print'
+      arguments:
+        Literal
+          value:
+            '"Hello, word"'
