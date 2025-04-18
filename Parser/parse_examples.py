@@ -38,7 +38,7 @@ class ParseExamples:
         """
         printer = ASTPrinter()
         with open(output_filepath, "w") as file:
-            output = ast.accept(printer)  # Print the AST(ast)
+            output = ast.accept(printer)  # Save the AST
             file.write(output)
 
 
