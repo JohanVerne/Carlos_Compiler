@@ -1,74 +1,33 @@
-Program
-  body:
-    FunDecl
-      identifier:
-        'identity'
-      params:
-        identifier:
-          'x'
-        type:
-          type:
-            'primitive'
-          name:
-            'any'
-      return_type:
-        type:
-          'primitive'
-        name:
-          'any'
-      body:
-        Block
-          statements:
-            Call
-              callee:
-                'return'
-              arguments:
-                Identifier
-                  name:
-                    'x'
-
-    Call
-      callee:
-        'print'
-      arguments:
-        Call
-          callee:
-            Identifier
-              name:
-                'identity'
-          arguments:
-            Literal
-              value:
-                '3'
-
-    Call
-      callee:
-        'print'
-      arguments:
-        Call
-          callee:
-            Identifier
-              name:
-                'identity'
-          arguments:
-            Literal
-              value:
-                '"hello"'
-
-    Call
-      callee:
-        'print'
-      arguments:
-        Call
-          callee:
-            Identifier
-              name:
-                'identity'
-          arguments:
-            UnaryOp
-              operator:
-                'SOME'
-              operand:
-                Literal
-                  value:
-                    'true'
+Program:
+  FunDecl: identity
+    Parameters:
+      Param: x : {'type': 'primitive', 'name': 'any'}
+    Return Type: {'type': 'primitive', 'name': 'any'}
+    Body:
+      Block:
+        Call: return
+          Arguments:
+            Identifier: x
+  Call: print
+    Arguments:
+      Call:
+        Callee:
+          Identifier: identity
+        Arguments:
+          Literal: 3
+  Call: print
+    Arguments:
+      Call:
+        Callee:
+          Identifier: identity
+        Arguments:
+          Literal: "hello"
+  Call: print
+    Arguments:
+      Call:
+        Callee:
+          Identifier: identity
+        Arguments:
+          UnaryOp (SOME):
+            Operand:
+              Literal: true

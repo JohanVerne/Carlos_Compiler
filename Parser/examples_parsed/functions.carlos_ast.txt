@@ -1,91 +1,38 @@
-Program
-  body:
-    FunDecl
-      identifier:
-        'f'
-      params:
-        identifier:
-          'a'
-        type:
-          type:
-            'primitive'
-          name:
-            'int'
-      return_type:
-        type:
-          'primitive'
-        name:
-          'int'
-      body:
-        Block
-          statements:
-            Call
-              callee:
-                'return'
-              arguments:
-                BinaryOp
-                  lhs:
-                    Identifier
-                      name:
-                        'a'
-                  op:
-                    'PLUS'
-                  rhs:
-                    Literal
-                      value:
-                        '3'
-
-    FunDecl
-      identifier:
-        'g'
-      params:
-        identifier:
-          'a'
-        type:
-          type:
-            'primitive'
-          name:
-            'int'
-      return_type:
-        type:
-          'primitive'
-        name:
-          'int'
-      body:
-        Block
-          statements:
-            Call
-              callee:
-                'return'
-              arguments:
-                BinaryOp
-                  lhs:
-                    Identifier
-                      name:
-                        'a'
-                  op:
-                    'MULTIPLICATION'
-                  rhs:
-                    Literal
-                      value:
-                        '2'
-
-    Call
-      callee:
-        'print'
-      arguments:
-        Call
-          callee:
-            Identifier
-              name:
-                'g'
-          arguments:
-            Call
-              callee:
-                Identifier
-                  name:
-                    'f'
-              arguments:
-                Literal
-                  value:
-                    '3'
+Program:
+  FunDecl: f
+    Parameters:
+      Param: a : {'type': 'primitive', 'name': 'int'}
+    Return Type: {'type': 'primitive', 'name': 'int'}
+    Body:
+      Block:
+        Call: return
+          Arguments:
+            BinaryOp (PLUS):
+              Left:
+                Identifier: a
+              Right:
+                Literal: 3
+  FunDecl: g
+    Parameters:
+      Param: a : {'type': 'primitive', 'name': 'int'}
+    Return Type: {'type': 'primitive', 'name': 'int'}
+    Body:
+      Block:
+        Call: return
+          Arguments:
+            BinaryOp (MULTIPLICATION):
+              Left:
+                Identifier: a
+              Right:
+                Literal: 2
+  Call: print
+    Arguments:
+      Call:
+        Callee:
+          Identifier: g
+        Arguments:
+          Call:
+            Callee:
+              Identifier: f
+            Arguments:
+              Literal: 3

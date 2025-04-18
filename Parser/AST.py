@@ -5,8 +5,8 @@ class ASTNode:
     """
 
     def accept(self, visitor):
-        name = self.__class__.__name__
-        exec(f"visitor.visit_{name}(self)")
+        method = getattr(visitor, f"visit_{self.__class__.__name__}")
+        return method(self)
 
 
 class Program(ASTNode):

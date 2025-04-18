@@ -1,97 +1,47 @@
-Program
-  body:
-    FunDecl
-      identifier:
-        'f'
-      params:
-      return_type:
-        None
-      body:
-        Block
-          statements:
-            VarDecl
-              decl_statement:
-                'LET'
-              identifier:
-                'x'
-              value:
-                Literal
-                  value:
-                    '3'
-
-            IfStmt
-              condition:
-                BinaryOp
-                  lhs:
-                    Identifier
-                      name:
-                        'x'
-                  op:
-                    'LESS_THAN'
-                  rhs:
-                    Literal
-                      value:
-                        '0'
-              then_block:
-                Block
-                  statements:
-                    Call
-                      callee:
-                        'print'
-                      arguments:
-                        Identifier
-                          name:
-                            'x'
-              else_block:
-                IfStmt
-                  condition:
-                    BinaryOp
-                      lhs:
-                        Identifier
-                          name:
-                            'x'
-                      op:
-                        'GREATER_THAN'
-                      rhs:
-                        Literal
-                          value:
-                            '5'
-                  then_block:
-                    Block
-                      statements:
-                        Call
-                          callee:
-                            'print'
-                          arguments:
-                            Literal
-                              value:
-                                '"Oh no"'
-                  else_block:
-                    Block
-                      statements:
-                        Call
-                          callee:
-                            'print'
-                          arguments:
-                            Literal
-                              value:
-                                '"ok"'
-
-    FunDecl
-      identifier:
-        'g'
-      params:
-      return_type:
-        None
-      body:
-        Block
-          statements:
-            VarDecl
-              decl_statement:
-                'LET'
-              identifier:
-                'x'
-              value:
-                Literal
-                  value:
-                    '3'
+Program:
+  FunDecl: f
+    Parameters:
+    Body:
+      Block:
+        VarDecl (LET):
+          Identifier: x
+          Value:
+            Literal: 3
+        IfStmt:
+          Condition:
+            BinaryOp (LESS_THAN):
+              Left:
+                Identifier: x
+              Right:
+                Literal: 0
+          Then Block:
+            Block:
+              Call: print
+                Arguments:
+                  Identifier: x
+          Else Block:
+            IfStmt:
+              Condition:
+                BinaryOp (GREATER_THAN):
+                  Left:
+                    Identifier: x
+                  Right:
+                    Literal: 5
+              Then Block:
+                Block:
+                  Call: print
+                    Arguments:
+                      Literal: "Oh no"
+              Else Block:
+                Block:
+                  Call: print
+                    Arguments:
+                      Literal: "ok"
+  FunDecl: g
+    Parameters:
+    Body:
+      Block:
+        VarDecl (LET):
+          Identifier: x
+          Value:
+            Literal: 3

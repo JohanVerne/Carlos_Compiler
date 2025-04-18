@@ -10,9 +10,10 @@ from Lexer.lexer import Lexer
 from parser import Parser
 from Lexer.lex_examples import LexExemples
 from AST import ASTNode
+from Visitors.ASTPrinter import ASTPrinter
 
 
-# Parse every file in the examples directory after having lexed them to test the lexer on basic examples
+# Parse every file in the examples directory after having lexed them to test the parser on basic examples
 class ParseExamples:
     def parse_files_in_directory(self, directory):
         output_directory = os.path.join(directory, "../Parser/examples_parsed")
@@ -35,29 +36,10 @@ class ParseExamples:
         """
         Save the generated AST to a file for debugging purposes.
         """
+        printer = ASTPrinter()
         with open(output_filepath, "w") as file:
-            file.write(self.format_ast(ast))
-
-    def format_ast(self, node, indent=0):
-        """
-        Recursively format the AST for better readability with consistent indentation.
-        """
-        if isinstance(node, list):
-            return "\n".join(self.format_ast(child, indent) for child in node)
-        elif isinstance(node, dict):
-            result = ""
-            for key, value in node.items():
-                result += f"{'  ' * indent}{key}:\n"
-                result += self.format_ast(value, indent + 1)
-            return result
-        elif isinstance(node, ASTNode):
-            result = "  " * indent + f"{node.__class__.__name__}\n"
-            for attr, value in vars(node).items():
-                result += f"{'  ' * (indent + 1)}{attr}:\n"
-                result += self.format_ast(value, indent + 2)
-            return result
-        else:
-            return "  " * indent + repr(node) + "\n"
+            output = ast.accept(printer)  # Print the AST(ast)
+            file.write(output)
 
 
 if __name__ == "__main__":

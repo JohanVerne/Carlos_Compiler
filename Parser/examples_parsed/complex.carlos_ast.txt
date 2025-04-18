@@ -1,1404 +1,586 @@
-Program
-  body:
-    VarDecl
-      decl_statement:
-        'CONST'
-      identifier:
-        'languageName'
-      value:
-        Literal
-          value:
-            '"Carlos"'
-
-    TypeDecl
-      identifier:
-        'Vector'
-      fields:
-        identifier:
-          'x'
-        type:
-          type:
-            'primitive'
-          name:
-            'float'
-
-        identifier:
-          'y'
-        type:
-          type:
-            'primitive'
-          name:
-            'float'
-
-        identifier:
-          'label'
-        type:
-          type:
-            'primitive'
-          name:
-            'string'
-
-    FunDecl
-      identifier:
-        'newVector'
-      params:
-        identifier:
-          'x'
-        type:
-          type:
-            'primitive'
-          name:
-            'float'
-
-        identifier:
-          'y'
-        type:
-          type:
-            'primitive'
-          name:
-            'float'
-
-        identifier:
-          'label'
-        type:
-          type:
-            'primitive'
-          name:
-            'string'
-      return_type:
-        type:
-          'id'
-        name:
-          'Vector'
-      body:
-        Block
-          statements:
-            Call
-              callee:
-                'return'
-              arguments:
-                Call
-                  callee:
-                    Identifier
-                      name:
-                        'Vector'
-                  arguments:
-                    Identifier
-                      name:
-                        'x'
-
-                    Identifier
-                      name:
-                        'y'
-
-                    Identifier
-                      name:
-                        'label'
-
-    FunDecl
-      identifier:
-        'magnitude'
-      params:
-        identifier:
-          'v'
-        type:
-          type:
-            'id'
-          name:
-            'Vector'
-      return_type:
-        type:
-          'primitive'
-        name:
-          'float'
-      body:
-        Block
-          statements:
-            Call
-              callee:
-                'return'
-              arguments:
-                Call
-                  callee:
-                    'sqrt'
-                  arguments:
-                    BinaryOp
-                      lhs:
-                        BinaryOp
-                          lhs:
-                            MemberAccess
-                              object_:
-                                Identifier
-                                  name:
-                                    'v'
-                              member:
-                                'x'
-                              op:
-                                False
-                          op:
-                            'MULTIPLICATION'
-                          rhs:
-                            MemberAccess
-                              object_:
-                                Identifier
-                                  name:
-                                    'v'
-                              member:
-                                'x'
-                              op:
-                                False
-                      op:
-                        'PLUS'
-                      rhs:
-                        BinaryOp
-                          lhs:
-                            MemberAccess
-                              object_:
-                                Identifier
-                                  name:
-                                    'v'
-                              member:
-                                'y'
-                              op:
-                                False
-                          op:
-                            'MULTIPLICATION'
-                          rhs:
-                            MemberAccess
-                              object_:
-                                Identifier
-                                  name:
-                                    'v'
-                              member:
-                                'y'
-                              op:
-                                False
-
-    FunDecl
-      identifier:
-        'scaleVector'
-      params:
-        identifier:
-          'v'
-        type:
-          type:
-            'id'
-          name:
-            'Vector'
-
-        identifier:
-          'factor'
-        type:
-          type:
-            'primitive'
-          name:
-            'float'
-      return_type:
-        type:
-          'id'
-        name:
-          'Vector'
-      body:
-        Block
-          statements:
-            VarDecl
-              decl_statement:
-                'LET'
-              identifier:
-                'newX'
-              value:
-                BinaryOp
-                  lhs:
-                    MemberAccess
-                      object_:
-                        Identifier
-                          name:
-                            'v'
-                      member:
-                        'x'
-                      op:
-                        False
-                  op:
-                    'MULTIPLICATION'
-                  rhs:
-                    Identifier
-                      name:
-                        'factor'
-
-            VarDecl
-              decl_statement:
-                'LET'
-              identifier:
-                'newY'
-              value:
-                BinaryOp
-                  lhs:
-                    MemberAccess
-                      object_:
-                        Identifier
-                          name:
-                            'v'
-                      member:
-                        'y'
-                      op:
-                        False
-                  op:
-                    'MULTIPLICATION'
-                  rhs:
-                    Identifier
-                      name:
-                        'factor'
-
-            Call
-              callee:
-                'return'
-              arguments:
-                Call
-                  callee:
-                    Identifier
-                      name:
-                        'Vector'
-                  arguments:
-                    Identifier
-                      name:
-                        'newX'
-
-                    Identifier
-                      name:
-                        'newY'
-
-                    MemberAccess
-                      object_:
-                        Identifier
-                          name:
-                            'v'
-                      member:
-                        'label'
-                      op:
-                        False
-
-    FunDecl
-      identifier:
-        'testOptional'
-      params:
-        identifier:
-          'flag'
-        type:
-          type:
-            'primitive'
-          name:
-            'boolean'
-      return_type:
-        type:
-          'optional'
-        base_type:
-          'int'
-      body:
-        Block
-          statements:
-            IfStmt
-              condition:
-                Identifier
-                  name:
-                    'flag'
-              then_block:
-                Block
-                  statements:
-                    Call
-                      callee:
-                        'return'
-                      arguments:
-                        UnaryOp
-                          operator:
-                            'SOME'
-                          operand:
-                            Literal
-                              value:
-                                '42'
-              else_block:
-                Block
-                  statements:
-                    Call
-                      callee:
-                        'return'
-                      arguments:
-                        Call
-                          callee:
-                            'emptyopt'
-                          arguments:
-                            type:
-                              'primitive'
-                            name:
-                              'int'
-
-    FunDecl
-      identifier:
-        'processArray'
-      params:
-        identifier:
-          'a'
-        type:
-          type:
-            'array'
-          inner_type:
-            type:
-              'primitive'
-            name:
-              'int'
-      return_type:
-        type:
-          'primitive'
-        name:
-          'int'
-      body:
-        Block
-          statements:
-            VarDecl
-              decl_statement:
-                'LET'
-              identifier:
-                'sum'
-              value:
-                Literal
-                  value:
-                    '0'
-
-            LoopStmt
-              loop_type:
-                'for'
-              condition:
-                id:
-                  'i'
-                iterable:
-                  Literal
-                    value:
-                      '0'
-                range_end:
-                  UnaryOp
-                    operator:
-                      'LENGTH'
-                    operand:
-                      Identifier
-                        name:
-                          'a'
-              body:
-                Block
-                  statements:
-                    Call
-                      callee:
-                        'assign'
-                      arguments:
-                        Identifier
-                          name:
-                            'sum'
-
-                        BinaryOp
-                          lhs:
-                            Identifier
-                              name:
-                                'sum'
-                          op:
-                            'PLUS'
-                          rhs:
-                            ArrayAccess
-                              array:
-                                Identifier
-                                  name:
-                                    'a'
-                              index:
-                                Identifier
-                                  name:
-                                    'i'
-
-            Call
-              callee:
-                'return'
-              arguments:
-                Identifier
-                  name:
-                    'sum'
-
-    FunDecl
-      identifier:
-        'stringFun'
-      params:
-        identifier:
-          's'
-        type:
-          type:
-            'primitive'
-          name:
-            'string'
-      return_type:
-        type:
-          'primitive'
-        name:
-          'string'
-      body:
-        Block
-          statements:
-            VarDecl
-              decl_statement:
-                'LET'
-              identifier:
-                'result'
-              value:
-                Literal
-                  value:
-                    '""'
-
-            VarDecl
-              decl_statement:
-                'LET'
-              identifier:
-                'cp'
-              value:
-                Call
-                  callee:
-                    'codepoints'
-                  arguments:
-                    Identifier
-                      name:
-                        's'
-
-            LoopStmt
-              loop_type:
-                'for'
-              condition:
-                id:
-                  'cpVal'
-                iterable:
-                  Identifier
-                    name:
-                      'cp'
-                range_end:
-                  None
-              body:
-                Block
-                  statements:
-                    Call
-                      callee:
-                        'assign'
-                      arguments:
-                        Identifier
-                          name:
-                            'result'
-
-                        BinaryOp
-                          lhs:
-                            Identifier
-                              name:
-                                'result'
-                          op:
-                            'PLUS'
-                          rhs:
-                            Call
-                              callee:
-                                'conditional'
-                              arguments:
-                                BinaryOp
-                                  lhs:
-                                    BinaryOp
-                                      lhs:
-                                        Identifier
-                                          name:
-                                            'cpVal'
-                                      op:
-                                        'MODULO'
-                                      rhs:
-                                        Literal
-                                          value:
-                                            '2'
-                                  op:
-                                    'IS_EQUAL'
-                                  rhs:
-                                    Literal
-                                      value:
-                                        '0'
-
-                                Literal
-                                  value:
-                                    '"E"'
-
-                                Literal
-                                  value:
-                                    '"O"'
-
-            Call
-              callee:
-                'return'
-              arguments:
-                Identifier
-                  name:
-                    'result'
-
-    FunDecl
-      identifier:
-        'complexCondition'
-      params:
-        identifier:
-          'a'
-        type:
-          type:
-            'primitive'
-          name:
-            'int'
-
-        identifier:
-          'b'
-        type:
-          type:
-            'primitive'
-          name:
-            'int'
-      return_type:
-        type:
-          'primitive'
-        name:
-          'boolean'
-      body:
-        Block
-          statements:
-            IfStmt
-              condition:
-                BinaryOp
-                  lhs:
-                    BinaryOp
-                      lhs:
-                        Identifier
-                          name:
-                            'a'
-                      op:
-                        'LESS_THAN'
-                      rhs:
-                        Identifier
-                          name:
-                            'b'
-                  op:
-                    'LOGICAL_AND'
-                  rhs:
-                    BinaryOp
-                      lhs:
-                        Identifier
-                          name:
-                            'a'
-                      op:
-                        'IS_NOT_EQUAL'
-                      rhs:
-                        Literal
-                          value:
-                            '0'
-              then_block:
-                Block
-                  statements:
-                    Call
-                      callee:
-                        'return'
-                      arguments:
-                        Literal
-                          value:
-                            'true'
-              else_block:
-                IfStmt
-                  condition:
-                    BinaryOp
-                      lhs:
-                        Identifier
-                          name:
-                            'a'
-                      op:
-                        'IS_EQUAL'
-                      rhs:
-                        Identifier
-                          name:
-                            'b'
-                  then_block:
-                    Block
-                      statements:
-                        Call
-                          callee:
-                            'return'
-                          arguments:
-                            Literal
-                              value:
-                                'false'
-                  else_block:
-                    Block
-                      statements:
-                        Call
-                          callee:
-                            'return'
-                          arguments:
-                            UnaryOp
-                              operator:
-                                'NOT'
-                              operand:
-                                Literal
-                                  value:
-                                    'false'
-
-    FunDecl
-      identifier:
-        'loopDemo'
-      params:
-        identifier:
-          'n'
-        type:
-          type:
-            'primitive'
-          name:
-            'int'
-      return_type:
-        type:
-          'primitive'
-        name:
-          'void'
-      body:
-        Block
-          statements:
-            VarDecl
-              decl_statement:
-                'LET'
-              identifier:
-                'counter'
-              value:
-                Identifier
-                  name:
-                    'n'
-
-            LoopStmt
-              loop_type:
-                'while'
-              condition:
-                BinaryOp
-                  lhs:
-                    Identifier
-                      name:
-                        'counter'
-                  op:
-                    'GREATER_THAN'
-                  rhs:
-                    Literal
-                      value:
-                        '0'
-              body:
-                Block
-                  statements:
-                    Call
-                      callee:
-                        'print'
-                      arguments:
-                        BinaryOp
-                          lhs:
-                            Literal
-                              value:
-                                '"Counter: "'
-                          op:
-                            'PLUS'
-                          rhs:
-                            Identifier
-                              name:
-                                'counter'
-
-                    Call
-                      callee:
-                        'DECREMENT'
-                      arguments:
-                        Identifier
-                          name:
-                            'counter'
-
-            LoopStmt
-              loop_type:
-                'repeat'
-              condition:
-                Literal
-                  value:
-                    '3'
-              body:
-                Block
-                  statements:
-                    Call
-                      callee:
-                        'print'
-                      arguments:
-                        Literal
-                          value:
-                            '"Repeat loop iteration"'
-
-    FunDecl
-      identifier:
-        'rangeDemo'
-      params:
-        identifier:
-          'start'
-        type:
-          type:
-            'primitive'
-          name:
-            'int'
-
-        identifier:
-          'end'
-        type:
-          type:
-            'primitive'
-          name:
-            'int'
-      return_type:
-        type:
-          'primitive'
-        name:
-          'void'
-      body:
-        Block
-          statements:
-            LoopStmt
-              loop_type:
-                'for'
-              condition:
-                id:
-                  'i'
-                iterable:
-                  Identifier
-                    name:
-                      'start'
-                range_end:
-                  Identifier
-                    name:
-                      'end'
-              body:
-                Block
-                  statements:
-                    IfStmt
-                      condition:
-                        BinaryOp
-                          lhs:
-                            BinaryOp
-                              lhs:
-                                Identifier
-                                  name:
-                                    'i'
-                              op:
-                                'MODULO'
-                              rhs:
-                                Literal
-                                  value:
-                                    '2'
-                          op:
-                            'IS_EQUAL'
-                          rhs:
-                            Literal
-                              value:
-                                '0'
-                      then_block:
-                        Block
-                          statements:
-                            Call
-                              callee:
-                                'print'
-                              arguments:
-                                BinaryOp
-                                  lhs:
-                                    Literal
-                                      value:
-                                        '"Even: "'
-                                  op:
-                                    'PLUS'
-                                  rhs:
-                                    Identifier
-                                      name:
-                                        'i'
-                      else_block:
-                        Block
-                          statements:
-                            Call
-                              callee:
-                                'print'
-                              arguments:
-                                BinaryOp
-                                  lhs:
-                                    Literal
-                                      value:
-                                        '"Odd: "'
-                                  op:
-                                    'PLUS'
-                                  rhs:
-                                    Identifier
-                                      name:
-                                        'i'
-
-    FunDecl
-      identifier:
-        'branchDemo'
-      params:
-        identifier:
-          'x'
-        type:
-          type:
-            'primitive'
-          name:
-            'int'
-      return_type:
-        type:
-          'primitive'
-        name:
-          'int'
-      body:
-        Block
-          statements:
-            IfStmt
-              condition:
-                BinaryOp
-                  lhs:
-                    Identifier
-                      name:
-                        'x'
-                  op:
-                    'GREATER_THAN'
-                  rhs:
-                    Literal
-                      value:
-                        '100'
-              then_block:
-                Block
-                  statements:
-                    Call
-                      callee:
-                        'return'
-                      arguments:
-                        BinaryOp
-                          lhs:
-                            Identifier
-                              name:
-                                'x'
-                          op:
-                            'MINUS'
-                          rhs:
-                            Literal
-                              value:
-                                '100'
-              else_block:
-                None
-
-            Call
-              callee:
-                'return'
-              arguments:
-                BinaryOp
-                  lhs:
-                    Identifier
-                      name:
-                        'x'
-                  op:
-                    'PLUS'
-                  rhs:
-                    Literal
-                      value:
-                        '100'
-
-    FunDecl
-      identifier:
-        'breakDemo'
-      params:
-        identifier:
-          'arr'
-        type:
-          type:
-            'array'
-          inner_type:
-            type:
-              'primitive'
-            name:
-              'int'
-      return_type:
-        type:
-          'primitive'
-        name:
-          'int'
-      body:
-        Block
-          statements:
-            VarDecl
-              decl_statement:
-                'LET'
-              identifier:
-                'total'
-              value:
-                Literal
-                  value:
-                    '0'
-
-            LoopStmt
-              loop_type:
-                'for'
-              condition:
-                id:
-                  'x'
-                iterable:
-                  Identifier
-                    name:
-                      'arr'
-                range_end:
-                  None
-              body:
-                Block
-                  statements:
-                    IfStmt
-                      condition:
-                        BinaryOp
-                          lhs:
-                            Identifier
-                              name:
-                                'x'
-                          op:
-                            'GREATER_THAN'
-                          rhs:
-                            Literal
-                              value:
-                                '50'
-                      then_block:
-                        Block
-                          statements:
-                            Literal
-                              value:
-                                'break'
-                      else_block:
-                        None
-
-                    Call
-                      callee:
-                        'assign'
-                      arguments:
-                        Identifier
-                          name:
-                            'total'
-
-                        BinaryOp
-                          lhs:
-                            Identifier
-                              name:
-                                'total'
-                          op:
-                            'PLUS'
-                          rhs:
-                            Identifier
-                              name:
-                                'x'
-
-            Call
-              callee:
-                'return'
-              arguments:
-                Identifier
-                  name:
-                    'total'
-
-    FunDecl
-      identifier:
-        'bitwiseDemo'
-      params:
-        identifier:
-          'x'
-        type:
-          type:
-            'primitive'
-          name:
-            'int'
-
-        identifier:
-          'y'
-        type:
-          type:
-            'primitive'
-          name:
-            'int'
-      return_type:
-        type:
-          'primitive'
-        name:
-          'int'
-      body:
-        Block
-          statements:
-            Call
-              callee:
-                'return'
-              arguments:
-                BinaryOp
-                  lhs:
-                    BinaryOp
-                      lhs:
-                        BinaryOp
-                          lhs:
-                            BinaryOp
-                              lhs:
-                                Identifier
-                                  name:
-                                    'x'
-                              op:
-                                'LEFT_SHIFT'
-                              rhs:
-                                Literal
-                                  value:
-                                    '1'
-                          op:
-                            'PLUS'
-                          rhs:
-                            BinaryOp
-                              lhs:
-                                Identifier
-                                  name:
-                                    'y'
-                              op:
-                                'RIGHT_SHIFT'
-                              rhs:
-                                Literal
-                                  value:
-                                    '1'
-                      op:
-                        'BITWISE_AND'
-                      rhs:
-                        BinaryOp
-                          lhs:
-                            Identifier
-                              name:
-                                'x'
-                          op:
-                            'BITWISE_XOR'
-                          rhs:
-                            Identifier
-                              name:
-                                'y'
-                  op:
-                    'BITWISE_OR'
-                  rhs:
-                    BinaryOp
-                      lhs:
-                        Identifier
-                          name:
-                            'x'
-                      op:
-                        'BITWISE_AND'
-                      rhs:
-                        Identifier
-                          name:
-                            'y'
-
-    Block
-      statements:
-        Call
-          callee:
-            'print'
-          arguments:
-            BinaryOp
-              lhs:
-                Literal
-                  value:
-                    '"Testing language: "'
-              op:
-                'PLUS'
-              rhs:
-                Identifier
-                  name:
-                    'languageName'
-
-        VarDecl
-          decl_statement:
-            'LET'
-          identifier:
-            'vec'
-          value:
-            Call
-              callee:
-                Identifier
-                  name:
-                    'newVector'
-              arguments:
-                Literal
-                  value:
-                    '3.0'
-
-                Literal
-                  value:
-                    '4.0'
-
-                Literal
-                  value:
-                    '"A"'
-
-        Call
-          callee:
-            'print'
-          arguments:
-            BinaryOp
-              lhs:
-                Literal
-                  value:
-                    '"Vector magnitude: "'
-              op:
-                'PLUS'
-              rhs:
-                Call
-                  callee:
-                    Identifier
-                      name:
-                        'magnitude'
-                  arguments:
-                    Identifier
-                      name:
-                        'vec'
-
-        VarDecl
-          decl_statement:
-            'LET'
-          identifier:
-            'scaled'
-          value:
-            Call
-              callee:
-                Identifier
-                  name:
-                    'scaleVector'
-              arguments:
-                Identifier
-                  name:
-                    'vec'
-
-                Literal
-                  value:
-                    '2.5'
-
-        Call
-          callee:
-            'print'
-          arguments:
-            BinaryOp
-              lhs:
-                Literal
-                  value:
-                    '"Scaled vector magnitude: "'
-              op:
-                'PLUS'
-              rhs:
-                Call
-                  callee:
-                    Identifier
-                      name:
-                        'magnitude'
-                  arguments:
-                    Identifier
-                      name:
-                        'scaled'
-
-        VarDecl
-          decl_statement:
-            'LET'
-          identifier:
-            'opt'
-          value:
-            Call
-              callee:
-                Identifier
-                  name:
-                    'testOptional'
-              arguments:
-                Literal
-                  value:
-                    'true'
-
-        Call
-          callee:
-            'print'
-          arguments:
-            BinaryOp
-              lhs:
-                Literal
-                  value:
-                    '"Optional value: "'
-              op:
-                'PLUS'
-              rhs:
-                Call
-                  callee:
-                    'unwrapelse'
-                  arguments:
-                    Identifier
-                      name:
-                        'opt'
-
-                    Literal
-                      value:
-                        '-1'
-
-        VarDecl
-          decl_statement:
-            'LET'
-          identifier:
-            'arrSum'
-          value:
-            Call
-              callee:
-                Identifier
-                  name:
-                    'processArray'
-              arguments:
-                Call
-                  callee:
-                    'array'
-                  arguments:
-                    Literal
-                      value:
-                        '10'
-
-                    Literal
-                      value:
-                        '20'
-
-                    Literal
-                      value:
-                        '30'
-
-                    Literal
-                      value:
-                        '40'
-
-        Call
-          callee:
-            'print'
-          arguments:
-            BinaryOp
-              lhs:
-                Literal
-                  value:
-                    '"Sum of array: "'
-              op:
-                'PLUS'
-              rhs:
-                Identifier
-                  name:
-                    'arrSum'
-
-        Call
-          callee:
-            'print'
-          arguments:
-            Call
-              callee:
-                Identifier
-                  name:
-                    'stringFun'
-              arguments:
-                Literal
-                  value:
-                    '"Hello, 世界"'
-
-        Call
-          callee:
-            Identifier
-              name:
-                'loopDemo'
-          arguments:
-            Literal
-              value:
-                '5'
-
-        Call
-          callee:
-            Identifier
-              name:
-                'rangeDemo'
-          arguments:
-            Literal
-              value:
-                '1'
-
-            Literal
-              value:
-                '10'
-
-        Call
-          callee:
-            'print'
-          arguments:
-            BinaryOp
-              lhs:
-                Literal
-                  value:
-                    '"Branch demo: "'
-              op:
-                'PLUS'
-              rhs:
-                Call
-                  callee:
-                    Identifier
-                      name:
-                        'branchDemo'
-                  arguments:
-                    Literal
-                      value:
-                        '50'
-
-        Call
-          callee:
-            'print'
-          arguments:
-            BinaryOp
-              lhs:
-                Literal
-                  value:
-                    '"Break demo: "'
-              op:
-                'PLUS'
-              rhs:
-                Call
-                  callee:
-                    Identifier
-                      name:
-                        'breakDemo'
-                  arguments:
-                    Call
-                      callee:
-                        'array'
-                      arguments:
-                        Literal
-                          value:
-                            '5'
-
-                        Literal
-                          value:
-                            '10'
-
-                        Literal
-                          value:
-                            '55'
-
-                        Literal
-                          value:
-                            '20'
-
-        Call
-          callee:
-            'print'
-          arguments:
-            BinaryOp
-              lhs:
-                Literal
-                  value:
-                    '"Bitwise demo: "'
-              op:
-                'PLUS'
-              rhs:
-                Call
-                  callee:
-                    Identifier
-                      name:
-                        'bitwiseDemo'
-                  arguments:
-                    Literal
-                      value:
-                        '12'
-
-                    Literal
-                      value:
-                        '5'
+Program:
+  VarDecl (CONST):
+    Identifier: languageName
+    Value:
+      Literal: "Carlos"
+  TypeDecl: Vector
+    Fields:
+      Field: x : {'type': 'primitive', 'name': 'float'}
+      Field: y : {'type': 'primitive', 'name': 'float'}
+      Field: label : {'type': 'primitive', 'name': 'string'}
+  FunDecl: newVector
+    Parameters:
+      Param: x : {'type': 'primitive', 'name': 'float'}
+      Param: y : {'type': 'primitive', 'name': 'float'}
+      Param: label : {'type': 'primitive', 'name': 'string'}
+    Return Type: {'type': 'id', 'name': 'Vector'}
+    Body:
+      Block:
+        Call: return
+          Arguments:
+            Call:
+              Callee:
+                Identifier: Vector
+              Arguments:
+                Identifier: x
+                Identifier: y
+                Identifier: label
+  FunDecl: magnitude
+    Parameters:
+      Param: v : {'type': 'id', 'name': 'Vector'}
+    Return Type: {'type': 'primitive', 'name': 'float'}
+    Body:
+      Block:
+        Call: return
+          Arguments:
+            Call: sqrt
+              Arguments:
+                BinaryOp (PLUS):
+                  Left:
+                    BinaryOp (MULTIPLICATION):
+                      Left:
+                        MemberAccess (.):
+                          Object:
+                            Identifier: v
+                          Member: x
+                      Right:
+                        MemberAccess (.):
+                          Object:
+                            Identifier: v
+                          Member: x
+                  Right:
+                    BinaryOp (MULTIPLICATION):
+                      Left:
+                        MemberAccess (.):
+                          Object:
+                            Identifier: v
+                          Member: y
+                      Right:
+                        MemberAccess (.):
+                          Object:
+                            Identifier: v
+                          Member: y
+  FunDecl: scaleVector
+    Parameters:
+      Param: v : {'type': 'id', 'name': 'Vector'}
+      Param: factor : {'type': 'primitive', 'name': 'float'}
+    Return Type: {'type': 'id', 'name': 'Vector'}
+    Body:
+      Block:
+        VarDecl (LET):
+          Identifier: newX
+          Value:
+            BinaryOp (MULTIPLICATION):
+              Left:
+                MemberAccess (.):
+                  Object:
+                    Identifier: v
+                  Member: x
+              Right:
+                Identifier: factor
+        VarDecl (LET):
+          Identifier: newY
+          Value:
+            BinaryOp (MULTIPLICATION):
+              Left:
+                MemberAccess (.):
+                  Object:
+                    Identifier: v
+                  Member: y
+              Right:
+                Identifier: factor
+        Call: return
+          Arguments:
+            Call:
+              Callee:
+                Identifier: Vector
+              Arguments:
+                Identifier: newX
+                Identifier: newY
+                MemberAccess (.):
+                  Object:
+                    Identifier: v
+                  Member: label
+  FunDecl: testOptional
+    Parameters:
+      Param: flag : {'type': 'primitive', 'name': 'boolean'}
+    Return Type: {'type': 'optional', 'base_type': 'int'}
+    Body:
+      Block:
+        IfStmt:
+          Condition:
+            Identifier: flag
+          Then Block:
+            Block:
+              Call: return
+                Arguments:
+                  UnaryOp (SOME):
+                    Operand:
+                      Literal: 42
+          Else Block:
+            Block:
+              Call: return
+                Arguments:
+                  Call: emptyopt
+                    Arguments:
+                      Dictionary: {'type': 'primitive', 'name': 'int'}
+  FunDecl: processArray
+    Parameters:
+      Param: a : {'type': 'array', 'inner_type': {'type': 'primitive', 'name': 'int'}}
+    Return Type: {'type': 'primitive', 'name': 'int'}
+    Body:
+      Block:
+        VarDecl (LET):
+          Identifier: sum
+          Value:
+            Literal: 0
+        LoopStmt (for):
+          Condition:
+            Identifier: i
+            Iterable:
+              Literal: 0
+            Range End:
+              UnaryOp (LENGTH):
+                Operand:
+                  Identifier: a
+          Body:
+            Block:
+              Call: assign
+                Arguments:
+                  Identifier: sum
+                  BinaryOp (PLUS):
+                    Left:
+                      Identifier: sum
+                    Right:
+                      ArrayAccess:
+                        Array:
+                          Identifier: a
+                        Index:
+                          Identifier: i
+        Call: return
+          Arguments:
+            Identifier: sum
+  FunDecl: stringFun
+    Parameters:
+      Param: s : {'type': 'primitive', 'name': 'string'}
+    Return Type: {'type': 'primitive', 'name': 'string'}
+    Body:
+      Block:
+        VarDecl (LET):
+          Identifier: result
+          Value:
+            Literal: ""
+        VarDecl (LET):
+          Identifier: cp
+          Value:
+            Call: codepoints
+              Arguments:
+                Identifier: s
+        LoopStmt (for):
+          Condition:
+            Identifier: cpVal
+            Iterable:
+              Identifier: cp
+          Body:
+            Block:
+              Call: assign
+                Arguments:
+                  Identifier: result
+                  BinaryOp (PLUS):
+                    Left:
+                      Identifier: result
+                    Right:
+                      Call: conditional
+                        Arguments:
+                          BinaryOp (IS_EQUAL):
+                            Left:
+                              BinaryOp (MODULO):
+                                Left:
+                                  Identifier: cpVal
+                                Right:
+                                  Literal: 2
+                            Right:
+                              Literal: 0
+                          Literal: "E"
+                          Literal: "O"
+        Call: return
+          Arguments:
+            Identifier: result
+  FunDecl: complexCondition
+    Parameters:
+      Param: a : {'type': 'primitive', 'name': 'int'}
+      Param: b : {'type': 'primitive', 'name': 'int'}
+    Return Type: {'type': 'primitive', 'name': 'boolean'}
+    Body:
+      Block:
+        IfStmt:
+          Condition:
+            BinaryOp (LOGICAL_AND):
+              Left:
+                BinaryOp (LESS_THAN):
+                  Left:
+                    Identifier: a
+                  Right:
+                    Identifier: b
+              Right:
+                BinaryOp (IS_NOT_EQUAL):
+                  Left:
+                    Identifier: a
+                  Right:
+                    Literal: 0
+          Then Block:
+            Block:
+              Call: return
+                Arguments:
+                  Literal: true
+          Else Block:
+            IfStmt:
+              Condition:
+                BinaryOp (IS_EQUAL):
+                  Left:
+                    Identifier: a
+                  Right:
+                    Identifier: b
+              Then Block:
+                Block:
+                  Call: return
+                    Arguments:
+                      Literal: false
+              Else Block:
+                Block:
+                  Call: return
+                    Arguments:
+                      UnaryOp (NOT):
+                        Operand:
+                          Literal: false
+  FunDecl: loopDemo
+    Parameters:
+      Param: n : {'type': 'primitive', 'name': 'int'}
+    Return Type: {'type': 'primitive', 'name': 'void'}
+    Body:
+      Block:
+        VarDecl (LET):
+          Identifier: counter
+          Value:
+            Identifier: n
+        LoopStmt (while):
+          Condition:
+            BinaryOp (GREATER_THAN):
+              Left:
+                Identifier: counter
+              Right:
+                Literal: 0
+          Body:
+            Block:
+              Call: print
+                Arguments:
+                  BinaryOp (PLUS):
+                    Left:
+                      Literal: "Counter: "
+                    Right:
+                      Identifier: counter
+              Call: DECREMENT
+                Arguments:
+                  Identifier: counter
+        LoopStmt (repeat):
+          Condition:
+            Literal: 3
+          Body:
+            Block:
+              Call: print
+                Arguments:
+                  Literal: "Repeat loop iteration"
+  FunDecl: rangeDemo
+    Parameters:
+      Param: start : {'type': 'primitive', 'name': 'int'}
+      Param: end : {'type': 'primitive', 'name': 'int'}
+    Return Type: {'type': 'primitive', 'name': 'void'}
+    Body:
+      Block:
+        LoopStmt (for):
+          Condition:
+            Identifier: i
+            Iterable:
+              Identifier: start
+            Range End:
+              Identifier: end
+          Body:
+            Block:
+              IfStmt:
+                Condition:
+                  BinaryOp (IS_EQUAL):
+                    Left:
+                      BinaryOp (MODULO):
+                        Left:
+                          Identifier: i
+                        Right:
+                          Literal: 2
+                    Right:
+                      Literal: 0
+                Then Block:
+                  Block:
+                    Call: print
+                      Arguments:
+                        BinaryOp (PLUS):
+                          Left:
+                            Literal: "Even: "
+                          Right:
+                            Identifier: i
+                Else Block:
+                  Block:
+                    Call: print
+                      Arguments:
+                        BinaryOp (PLUS):
+                          Left:
+                            Literal: "Odd: "
+                          Right:
+                            Identifier: i
+  FunDecl: branchDemo
+    Parameters:
+      Param: x : {'type': 'primitive', 'name': 'int'}
+    Return Type: {'type': 'primitive', 'name': 'int'}
+    Body:
+      Block:
+        IfStmt:
+          Condition:
+            BinaryOp (GREATER_THAN):
+              Left:
+                Identifier: x
+              Right:
+                Literal: 100
+          Then Block:
+            Block:
+              Call: return
+                Arguments:
+                  BinaryOp (MINUS):
+                    Left:
+                      Identifier: x
+                    Right:
+                      Literal: 100
+        Call: return
+          Arguments:
+            BinaryOp (PLUS):
+              Left:
+                Identifier: x
+              Right:
+                Literal: 100
+  FunDecl: breakDemo
+    Parameters:
+      Param: arr : {'type': 'array', 'inner_type': {'type': 'primitive', 'name': 'int'}}
+    Return Type: {'type': 'primitive', 'name': 'int'}
+    Body:
+      Block:
+        VarDecl (LET):
+          Identifier: total
+          Value:
+            Literal: 0
+        LoopStmt (for):
+          Condition:
+            Identifier: x
+            Iterable:
+              Identifier: arr
+          Body:
+            Block:
+              IfStmt:
+                Condition:
+                  BinaryOp (GREATER_THAN):
+                    Left:
+                      Identifier: x
+                    Right:
+                      Literal: 50
+                Then Block:
+                  Block:
+                    Literal: break
+              Call: assign
+                Arguments:
+                  Identifier: total
+                  BinaryOp (PLUS):
+                    Left:
+                      Identifier: total
+                    Right:
+                      Identifier: x
+        Call: return
+          Arguments:
+            Identifier: total
+  FunDecl: bitwiseDemo
+    Parameters:
+      Param: x : {'type': 'primitive', 'name': 'int'}
+      Param: y : {'type': 'primitive', 'name': 'int'}
+    Return Type: {'type': 'primitive', 'name': 'int'}
+    Body:
+      Block:
+        Call: return
+          Arguments:
+            BinaryOp (BITWISE_OR):
+              Left:
+                BinaryOp (BITWISE_AND):
+                  Left:
+                    BinaryOp (PLUS):
+                      Left:
+                        BinaryOp (LEFT_SHIFT):
+                          Left:
+                            Identifier: x
+                          Right:
+                            Literal: 1
+                      Right:
+                        BinaryOp (RIGHT_SHIFT):
+                          Left:
+                            Identifier: y
+                          Right:
+                            Literal: 1
+                  Right:
+                    BinaryOp (BITWISE_XOR):
+                      Left:
+                        Identifier: x
+                      Right:
+                        Identifier: y
+              Right:
+                BinaryOp (BITWISE_AND):
+                  Left:
+                    Identifier: x
+                  Right:
+                    Identifier: y
+  Block:
+    Call: print
+      Arguments:
+        BinaryOp (PLUS):
+          Left:
+            Literal: "Testing language: "
+          Right:
+            Identifier: languageName
+    VarDecl (LET):
+      Identifier: vec
+      Value:
+        Call:
+          Callee:
+            Identifier: newVector
+          Arguments:
+            Literal: 3.0
+            Literal: 4.0
+            Literal: "A"
+    Call: print
+      Arguments:
+        BinaryOp (PLUS):
+          Left:
+            Literal: "Vector magnitude: "
+          Right:
+            Call:
+              Callee:
+                Identifier: magnitude
+              Arguments:
+                Identifier: vec
+    VarDecl (LET):
+      Identifier: scaled
+      Value:
+        Call:
+          Callee:
+            Identifier: scaleVector
+          Arguments:
+            Identifier: vec
+            Literal: 2.5
+    Call: print
+      Arguments:
+        BinaryOp (PLUS):
+          Left:
+            Literal: "Scaled vector magnitude: "
+          Right:
+            Call:
+              Callee:
+                Identifier: magnitude
+              Arguments:
+                Identifier: scaled
+    VarDecl (LET):
+      Identifier: opt
+      Value:
+        Call:
+          Callee:
+            Identifier: testOptional
+          Arguments:
+            Literal: true
+    Call: print
+      Arguments:
+        BinaryOp (PLUS):
+          Left:
+            Literal: "Optional value: "
+          Right:
+            Call: unwrapelse
+              Arguments:
+                Identifier: opt
+                Literal: -1
+    VarDecl (LET):
+      Identifier: arrSum
+      Value:
+        Call:
+          Callee:
+            Identifier: processArray
+          Arguments:
+            Call: array
+              Arguments:
+                Literal: 10
+                Literal: 20
+                Literal: 30
+                Literal: 40
+    Call: print
+      Arguments:
+        BinaryOp (PLUS):
+          Left:
+            Literal: "Sum of array: "
+          Right:
+            Identifier: arrSum
+    Call: print
+      Arguments:
+        Call:
+          Callee:
+            Identifier: stringFun
+          Arguments:
+            Literal: "Hello, 世界"
+    Call:
+      Callee:
+        Identifier: loopDemo
+      Arguments:
+        Literal: 5
+    Call:
+      Callee:
+        Identifier: rangeDemo
+      Arguments:
+        Literal: 1
+        Literal: 10
+    Call: print
+      Arguments:
+        BinaryOp (PLUS):
+          Left:
+            Literal: "Branch demo: "
+          Right:
+            Call:
+              Callee:
+                Identifier: branchDemo
+              Arguments:
+                Literal: 50
+    Call: print
+      Arguments:
+        BinaryOp (PLUS):
+          Left:
+            Literal: "Break demo: "
+          Right:
+            Call:
+              Callee:
+                Identifier: breakDemo
+              Arguments:
+                Call: array
+                  Arguments:
+                    Literal: 5
+                    Literal: 10
+                    Literal: 55
+                    Literal: 20
+    Call: print
+      Arguments:
+        BinaryOp (PLUS):
+          Left:
+            Literal: "Bitwise demo: "
+          Right:
+            Call:
+              Callee:
+                Identifier: bitwiseDemo
+              Arguments:
+                Literal: 12
+                Literal: 5

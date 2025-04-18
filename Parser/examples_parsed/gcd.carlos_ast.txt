@@ -1,92 +1,36 @@
-Program
-  body:
-    FunDecl
-      identifier:
-        'gcd'
-      params:
-        identifier:
-          'x'
-        type:
-          type:
-            'primitive'
-          name:
-            'int'
-
-        identifier:
-          'y'
-        type:
-          type:
-            'primitive'
-          name:
-            'int'
-      return_type:
-        type:
-          'primitive'
-        name:
-          'int'
-      body:
-        Block
-          statements:
-            Call
-              callee:
-                'return'
-              arguments:
-                Call
-                  callee:
-                    'conditional'
-                  arguments:
-                    BinaryOp
-                      lhs:
-                        Identifier
-                          name:
-                            'y'
-                      op:
-                        'IS_EQUAL'
-                      rhs:
-                        Literal
-                          value:
-                            '0'
-
-                    Identifier
-                      name:
-                        'x'
-
-                    Call
-                      callee:
-                        Identifier
-                          name:
-                            'gcd'
-                      arguments:
-                        Identifier
-                          name:
-                            'y'
-
-                        BinaryOp
-                          lhs:
-                            Identifier
-                              name:
-                                'x'
-                          op:
-                            'MODULO'
-                          rhs:
-                            Identifier
-                              name:
-                                'y'
-
-    Call
-      callee:
-        'print'
-      arguments:
-        Call
-          callee:
-            Identifier
-              name:
-                'gcd'
-          arguments:
-            Literal
-              value:
-                '5023427'
-
-            Literal
-              value:
-                '920311'
+Program:
+  FunDecl: gcd
+    Parameters:
+      Param: x : {'type': 'primitive', 'name': 'int'}
+      Param: y : {'type': 'primitive', 'name': 'int'}
+    Return Type: {'type': 'primitive', 'name': 'int'}
+    Body:
+      Block:
+        Call: return
+          Arguments:
+            Call: conditional
+              Arguments:
+                BinaryOp (IS_EQUAL):
+                  Left:
+                    Identifier: y
+                  Right:
+                    Literal: 0
+                Identifier: x
+                Call:
+                  Callee:
+                    Identifier: gcd
+                  Arguments:
+                    Identifier: y
+                    BinaryOp (MODULO):
+                      Left:
+                        Identifier: x
+                      Right:
+                        Identifier: y
+  Call: print
+    Arguments:
+      Call:
+        Callee:
+          Identifier: gcd
+        Arguments:
+          Literal: 5023427
+          Literal: 920311

@@ -1,90 +1,37 @@
-Program
-  body:
-    VarDecl
-      decl_statement:
-        'LET'
-      identifier:
-        'x'
-      value:
-        Call
-          callee:
-            'emptyopt'
-          arguments:
-            type:
-              'primitive'
-            name:
-              'int'
-
-    VarDecl
-      decl_statement:
-        'LET'
-      identifier:
-        'y'
-      value:
-        Call
-          callee:
-            'unwrapelse'
-          arguments:
-            Identifier
-              name:
-                'x'
-
-            Literal
-              value:
-                '2'
-
-    TypeDecl
-      identifier:
-        'S'
-      fields:
-        identifier:
-          'x'
-        type:
-          type:
-            'primitive'
-          name:
-            'int'
-
-    VarDecl
-      decl_statement:
-        'LET'
-      identifier:
-        'z'
-      value:
-        UnaryOp
-          operator:
-            'SOME'
-          operand:
-            Call
-              callee:
-                Identifier
-                  name:
-                    'S'
-              arguments:
-                Literal
-                  value:
-                    '1'
-
-    VarDecl
-      decl_statement:
-        'LET'
-      identifier:
-        'w'
-      value:
-        MemberAccess
-          object_:
-            Identifier
-              name:
-                'z'
-          member:
-            'x'
-          op:
-            True
-
-    Call
-      callee:
-        'print'
-      arguments:
-        Identifier
-          name:
-            'w'
+Program:
+  VarDecl (LET):
+    Identifier: x
+    Value:
+      Call: emptyopt
+        Arguments:
+          Dictionary: {'type': 'primitive', 'name': 'int'}
+  VarDecl (LET):
+    Identifier: y
+    Value:
+      Call: unwrapelse
+        Arguments:
+          Identifier: x
+          Literal: 2
+  TypeDecl: S
+    Fields:
+      Field: x : {'type': 'primitive', 'name': 'int'}
+  VarDecl (LET):
+    Identifier: z
+    Value:
+      UnaryOp (SOME):
+        Operand:
+          Call:
+            Callee:
+              Identifier: S
+            Arguments:
+              Literal: 1
+  VarDecl (LET):
+    Identifier: w
+    Value:
+      MemberAccess (?.):
+        Object:
+          Identifier: z
+        Member: x
+  Call: print
+    Arguments:
+      Identifier: w
