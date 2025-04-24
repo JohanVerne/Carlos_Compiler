@@ -1,13 +1,13 @@
 let x = no int;
 
-let y = x ?? "2";
+let y = x ?? 2;
 
 struct S {
   x: int
 }
 
-let z = some (S("1"));
+let z = some S(1);
 
-let w = (z)?.x;
+let w = z?.x;
 
 print(w)

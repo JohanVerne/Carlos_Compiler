@@ -2,8 +2,8 @@ function identity(x: any): any {
   return x;
 }
 
-print(identity("3"))
+print(identity(3))
 
 print(identity("hello"))
 
-print(identity(some (true)))
+print(identity(some true))

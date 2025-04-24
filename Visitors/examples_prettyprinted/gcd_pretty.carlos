@@ -1,5 +1,5 @@
 function gcd(x: int, y: int): int {
-  return y == "0" ? x : gcd(y, x % y);
+  return y == 0 ? x : gcd(y, x % y);
 }
 
-print(gcd("5023427", "920311"))
+print(gcd(5023427, 920311))

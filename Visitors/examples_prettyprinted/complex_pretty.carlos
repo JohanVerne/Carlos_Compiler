@@ -11,27 +11,27 @@ function newVector(x: float, y: float, label: string): Vector {
 }
 
 function magnitude(v: Vector): float {
-  return   sqrt((v).x * (v).x + (v).y * (v).y);
+  return   sqrt(v.x * v.x + v.y * v.y);
 }
 
 function scaleVector(v: Vector, factor: float): Vector {
-  let newX = (v).x * factor;
-  let newY = (v).y * factor;
-  return Vector(newX, newY, (v).label);
+  let newX = v.x * factor;
+  let newY = v.y * factor;
+  return Vector(newX, newY, v.label);
 }
 
 function testOptional(flag: boolean): int? {
   if flag {
-    return some ("42");
+    return some 42;
   } else {
     return no int;
   }
 }
 
 function processArray(a: [int]): int {
-  let sum = "0";
-  for i in "0" ..< #(a){
-    sum = sum + (a)[i];
+  let sum = 0;
+  for i in 0 ..< #a{
+    sum = sum + a[i];
   }
   return sum;
 }
@@ -40,35 +40,35 @@ function stringFun(s: string): string {
   let result = "";
   let cp =   codepoints(s);
   for cpVal in cp{
-    result = result + cpVal % "2" == "0" ? "E" : "O";
+    result = result + cpVal % 2 == 0 ? "E" : "O";
   }
   return result;
 }
 
 function complexCondition(a: int, b: int): boolean {
-  if a < b && a != "0" {
+  if a < b && a != 0 {
     return true;
-  } else   if a == b {
+  } else if a == b {
     return false;
   } else {
-    return !(false);
+    return !false;
   }
 }
 
 function loopDemo(n: int): void {
   let counter = n;
-  while counter > "0" {
+  while counter > 0 {
     print("Counter: " + counter)
     counter--;
   }
-  repeat "3" {
+  repeat 3 {
     print("Repeat loop iteration")
   }
 }
 
 function rangeDemo(start: int, end: int): void {
   for i in start ..< end{
-    if i % "2" == "0" {
+    if i % 2 == 0 {
       print("Even: " + i)
     } else {
       print("Odd: " + i)
@@ -77,16 +77,16 @@ function rangeDemo(start: int, end: int): void {
 }
 
 function branchDemo(x: int): int {
-  if x > "100" {
-    return x - "100";
+  if x > 100 {
+    return x - 100;
   }
-  return x + "100";
+  return x + 100;
 }
 
 function breakDemo(arr: [int]): int {
-  let total = "0";
+  let total = 0;
   for x in arr{
-    if x > "50" {
+    if x > 50 {
 break
     }
     total = total + x;
@@ -95,23 +95,23 @@ break
 }
 
 function bitwiseDemo(x: int, y: int): int {
-  return x << "1" + y >> "1" & x ^ y | x & y;
+  return (x << 1) + (y >> 1) & (x ^ y) | x & y;
 }
 
 {
   print("Testing language: " + languageName)
-  let vec = newVector("3.0", "4.0", "A");
+  let vec = newVector(3, 4, "A");
   print("Vector magnitude: " + magnitude(vec))
-  let scaled = scaleVector(vec, "2.5");
+  let scaled = scaleVector(vec, 2.5);
   print("Scaled vector magnitude: " + magnitude(scaled))
   let opt = testOptional(true);
-  print("Optional value: " + opt ?? "-1")
-  let arrSum = processArray(["10", "20", "30", "40"]);
+  print("Optional value: " + opt ?? -1)
+  let arrSum = processArray([10, 20, 30, 40]);
   print("Sum of array: " + arrSum)
   print(stringFun("Hello, 世界"))
-loopDemo("5")
-rangeDemo("1", "10")
-  print("Branch demo: " + branchDemo("50"))
-  print("Break demo: " + breakDemo(["5", "10", "55", "20"]))
-  print("Bitwise demo: " + bitwiseDemo("12", "5"))
+loopDemo(5)
+rangeDemo(1, 10)
+  print("Branch demo: " + branchDemo(50))
+  print("Break demo: " + breakDemo([5, 10, 55, 20]))
+  print("Bitwise demo: " + bitwiseDemo(12, 5))
 }

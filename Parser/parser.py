@@ -1,6 +1,16 @@
-from Lexer.lexer import Lexem
 import logging
-from AST import (
+import sys
+import os
+
+# Add the parent directory to the sys.path
+script_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.abspath(os.path.join(script_dir, os.pardir))
+sys.path.append(parent_dir)
+sys.path.append(os.path.join(parent_dir, "Lexer"))  # Add Lexer directory to path
+
+from Lexer.lexer import Lexem, Lexer
+from Visitors.ASTPrinter import ASTPrinter
+from Parser.AST import (
     Program,
     VarDecl,
     TypeDecl,
@@ -613,3 +623,57 @@ class Parser:
             raise ParsingException(
                 f"Error at {str(self.show_next().position)}: Expected standard library function, got {self.show_next().tag} instead"
             )
+
+
+if __name__ == "__main__":
+
+    if len(sys.argv) < 2 or len(sys.argv) > 3:
+        print("Usage: python3 parser.py <input_file.carlos> [--save]")
+        sys.exit(1)
+
+    input_file = sys.argv[1]
+    save_ast = "--save" in sys.argv  # Save only if --save is explicitly provided
+
+    # Step 1: Lex the input file
+    try:
+        with open(input_file, "r") as file:
+            input_text = file.readlines()
+    except FileNotFoundError:
+        print(f"Error: File '{input_file}' not found.")
+        sys.exit(1)
+
+    lexer = Lexer()
+    try:
+        lexems = lexer.lex(input_text)
+    except Exception as e:
+        print(f"Lexing failed: {e}")
+        sys.exit(1)
+
+    # Initialize the parser and parse the lexems
+    parser = Parser(lexems)
+    try:
+        ast = parser.parse()
+    except ParsingException as e:
+        print(f"Parsing failed: {e}")
+        sys.exit(1)
+
+    # Print the AST to the terminal
+    printer = ASTPrinter()
+    print("Parsed AST:")
+    print(ast.accept(printer))
+
+    # Save the AST to a file if --save is provided
+    if save_ast:
+        # Ensure the examples_parsed directory exists
+        output_dir = os.path.join(
+            os.path.dirname(input_file), "../Parser/examples_parsed"
+        )
+        os.makedirs(output_dir, exist_ok=True)
+
+        # Save the AST in the examples_parsed directory
+        output_file = os.path.join(
+            output_dir, os.path.basename(input_file) + "_ast.txt"
+        )
+        with open(output_file, "w") as file:
+            file.write(ast.accept(printer))  # Save the AST in a readable format
+        print(f"AST saved to: {output_file}")

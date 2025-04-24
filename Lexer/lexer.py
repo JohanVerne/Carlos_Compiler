@@ -1,5 +1,6 @@
 import re
 import sys
+import os
 
 regex_expressions = [
     # comments
@@ -233,4 +234,47 @@ class Lexem:
         self.position = position
 
     def __repr__(self):
-        return self.tag
+        return f"{self.tag}({self.value})"
+
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2 or len(sys.argv) > 3:
+        print("Usage: python3 lexer.py <input_file> [--save]")
+        sys.exit(1)
+
+    input_file = sys.argv[1]
+    save_output = "--save" in sys.argv  # Save only if --save is explicitly provided
+
+    # Read the input file
+    try:
+        with open(input_file, "r") as file:
+            input_text = file.readlines()
+    except FileNotFoundError:
+        print(f"Error: File '{input_file}' not found.")
+        sys.exit(1)
+
+    # Initialize the lexer and process the input
+    lexer = Lexer()
+    lexems = lexer.lex(input_text)
+
+    # Print the lexems to the terminal
+    print("Lexems:")
+    for lexem in lexems:
+        print(lexem)
+
+    # Save the lexems to a file if --save is provided
+    if save_output:
+        # Ensure the examples_lexed directory exists
+        output_dir = os.path.join(
+            os.path.dirname(input_file), "../Lexer/examples_lexed"
+        )
+        os.makedirs(output_dir, exist_ok=True)
+
+        # Save the lexems in the examples_lexed directory
+        output_file = os.path.join(
+            output_dir, os.path.basename(input_file) + "_lexed.txt"
+        )
+        with open(output_file, "w") as file:
+            for lexem in lexems:
+                file.write(f"{lexem.tag}: {lexem.value} at {lexem.position}\n")
+        print(f"Lexems saved to: {output_file}")
