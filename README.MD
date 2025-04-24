@@ -29,7 +29,7 @@ git clone https://github.com/JohanVerne/Carlos_Compiler.git
 
 ou télécharger le zip.
 
-Afin de pouvoir compiler intégralement un fichier .carlos jusqu'à son exécution en tant que fichier JavaScript, vous devez avoir Node.js installé. Vous pouvez obtenir Node.js depuis [https://nodejs.org](https://nodejs.org) ou avec votre package manager favori.
+Afin de pouvoir compiler intégralement un fichier .carlos jusqu'à leur exécution en tant que fichier JavaScript, vous devez avoir Node.js installé. Vous pouvez obtenir Node.js depuis [https://nodejs.org](https://nodejs.org) ou avec votre package manager favori.
 
 ## Étapes de compilation
 
