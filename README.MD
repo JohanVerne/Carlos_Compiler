@@ -12,6 +12,8 @@ Le projet est organisé en plusieurs dossiers, chacun correspondant à une étap
 - **examples/** : Contient des exemples de code source en Carlos.
 - **Lexer/examples_lexed/** : Contient les résultats de l'analyse lexicale des exemples.
 - **Parser/examples_parsed/** : Contient les AST générés à partir des exemples.
+- **Visitors/examples_js/** : Contient le code JavaScript généré des exemples.
+- **Visitors/examples_prettyprinted/** : Contient le code source en Carlos pretty-printed des exemples.
 
 ---
 
