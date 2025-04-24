@@ -260,7 +260,7 @@ if __name__ == "__main__":
     # Print the lexems to the terminal
     print("Lexems:")
     for lexem in lexems:
-        print(lexem)
+        print(f"{lexem.tag}: {lexem.value} at {lexem.position}\n")
 
     # Save the lexems to a file if --save is provided
     if save_output:

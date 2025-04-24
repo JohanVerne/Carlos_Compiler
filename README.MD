@@ -15,6 +15,20 @@ Le projet est organisé en plusieurs dossiers, chacun correspondant à une étap
 
 ---
 
+## Installation et exécution
+
+Pour utiliser le compilateur, vous devez avoir Python 3 installé, aucune bibliothèque n'est necessaire à l'exécution des différents fichiers.
+
+Vous pouvez cloner le projet depuis GitHub :
+
+```bash
+git clone https://github.com/JohanVerne/Carlos_Compiler.git
+```
+
+ou télécharger le zip.
+
+Afin de pouvoir compiler intégralement un fichier .carlos jusqu'à son exécution en tant que fichier JavaScript, vous devez avoir Node.js installé. Vous pouvez obtenir Node.js depuis [https://nodejs.org](https://nodejs.org) ou avec votre package manager favori.
+
 ## Étapes de compilation
 
 ### 1. Analyse lexicale (Lexer)
@@ -24,9 +38,13 @@ L'analyse lexicale transforme le code source brut en une liste de lexèmes (toke
 - **Fichier principal** : `Lexer/lexer.py`
 - **Exemple d'utilisation** :
   ```bash
+  python3 Lexer/lexer.py examples/hello.carlos
+  ```
+  Cela affiche les lexems dans le terminal. Pour sauvegarder les lexems dans un fichier, ajoutez l'argument `--save` :
+  ```bash
   python3 Lexer/lexer.py examples/hello.carlos --save
   ```
-  Cela génère un fichier contenant la représentation des lexems dans le dossier examples_lexed.
+  Les lexems seront sauvegardés dans le dossier `Lexer/examples_lexed`.
 
 ### 2. Analyse syntaxique (Parser)
 
@@ -35,9 +53,13 @@ L'analyse syntaxique prend les lexèmes produits par le lexer et construit un ar
 - **Fichier principal** : `Parser/parser.py`
 - **Exemple d'utilisation** :
   ```bash
+  python3 Parser/parser.py examples/hello.carlos
+  ```
+  Cela affiche l'AST dans le terminal. Pour sauvegarder l'AST dans un fichier, ajoutez l'argument `--save` :
+  ```bash
   python3 Parser/parser.py examples/hello.carlos --save
   ```
-  Cela génère un fichier contenant l'AST dans le dossier `examples_parsed`.
+  L'AST sera sauvegardé dans le dossier `Parser/examples_parsed`.
 
 ---
 
@@ -45,9 +67,9 @@ L'analyse syntaxique prend les lexèmes produits par le lexer et construit un ar
 
 Les visiteurs parcourent l'AST pour effectuer diverses tâches, comme :
 
-- **Pretty-printer** : Génère une version formatée du code source.
+- **Pretty-printer** : Regénère le code source en Carlos à partir de l'AST.
   - **Fichier** : `Visitors/PrettyPrinter.py`
-- **Générateur de code JavaScript** : Convertit le code Carlos en JavaScript.
+- **Générateur de code JavaScript** : Convertit le code Carlos en code JavaScript.
   - **Fichier** : `Visitors/JSCodeGenerator.py`
 
 Exemple d'utilisation pour le pretty-printer :
@@ -58,42 +80,68 @@ python3 Visitors/PrettyPrinter.py examples/hello.carlos --save
 
 ---
 
-## Exemples
+### 4. Génération de code JavaScript
 
-Des exemples de code source en Carlos sont disponibles dans le dossier `examples`. Voici un exemple simple :
+La phase finale consiste à utiliser le générateur de code JavaScript pour obtenir le code JavaScript final. Celui-ci pourra ensuite être exécuté grâce à Node.js. Exemple d'utilisation :
 
-```carlos
-function helloWorld() {
-  print("Hello, World!");
-}
+```bash
+python3 Visitors/JSCodeGenerator.py examples/hello.carlos --save
 ```
 
-Pour tester les différentes étapes de compilation sur cet exemple, utilisez les commandes suivantes :
+Le code JavaScript sera sauvegardé dans le dossier `Visitors/examples_js`. Il peut ensuite être exécuté avec Node.js.
 
-1. **Analyse lexicale** :
+Exemple d'utilisation :
 
-   ```bash
-   python3 Lexer/lexer.py examples/hello.carlos --save
-   ```
+```bash
+node Visitors/examples_js/hello.js
+```
 
-2. **Analyse syntaxique** :
+---
 
-   ```bash
-   python3 Parser/parser.py examples/hello.carlos --save
-   ```
+### 5. Compilation puis exécution
 
-3. **Pretty-print** :
-   ```bash
-   python3 Visitors/PrettyPrinter.py examples/hello.carlos --save
-   ```
+Pour compiler un fichier Carlos et l'exécuter, vous pouvez utiliser le fichier `compiler.py` :
+
+```bash
+python3 compiler.py examples/hello.carlos
+```
+
+Le code JavaScript sera ensuite exécuté avec Node.js.
+
+Pour sauvegarder le code JavaScript, ajoutez l'argument `--save` :
+
+```bash
+python3 compiler.py examples/hello.carlos --save
+```
+
+Le code JavaScript sera sauvegardé dans le dossier `Visitors/examples_js`.
+
+## Exemples
+
+Des exemples de code source en Carlos sont disponibles dans le dossier `examples`. Ces examples proviennent des examples présents sur le projet Carlos décrit en sources. Un example additionnel nommé `complex.carlos` à été généré par ChatGPT pour implémenter un maximum des fonctionnalités possibles par le code Carlos.
+
+Pour tester les différentes étapes de compilation sur les différents exemples, les différents fichiers nommés `lex_examples.py`, `parse_examples.py`, `create_JS_files_from_examples.py` et `PrettyPrint_examples.py` sont disponibles dans leurs dossiers respectifs. Ils effectuent leurs tâches respectives sur l'intégralité des fichiers présents dans le dossier `examples` et sauvegardent les résultats dans leurs dossiers examples respectifs.
+
+Pour tester ces exemples, vous pouvez utiliser les commandes suivantes :
+
+```bash
+python3 Lexer/lex_examples.py
+python3 Parser/parse_examples.py
+python3 Visitors/create_JS_files_from_examples.py
+python3 Visitors/PrettyPrint_examples.py
+```
 
 ---
 
 ## Objectif du projet
 
-L'objectif principal est de convertir le code Carlos en JavaScript pour permettre son exécution. Ce projet peut également servir de base pour apprendre les concepts de compilation.
+L'objectif principal est de convertir le code Carlos en code JavaScript pour permettre son exécution.
 
 ---
+
+## Sources
+
+Les différentes sources utilisées pour la compréhension du langage Carlos ainsi que les liens vers d'autres projets utilisant le langage Carlos sont disponibles ici :
 
 - https://cs.lmu.edu/~ray/notes/carlos/
 - https://github.com/rtoal/carlos/
