@@ -30,6 +30,7 @@ git clone https://github.com/JohanVerne/Carlos_Compiler.git
 ou télécharger le zip.
 
 Afin de pouvoir compiler intégralement un fichier .carlos jusqu'à leur exécution en tant que fichier JavaScript, vous devez avoir Node.js installé. Vous pouvez obtenir Node.js depuis [https://nodejs.org](https://nodejs.org) ou avec votre package manager favori.
+Si vous ne souhaitez pas utiliser Node.js ou possèdez un interpréteur JavaScript différent, vous ne pourrez pas utiliser le fichier `compiler.py` pour exécuter le code JavaScript généré à partir du .carlos. Cependant, vous pouvez utiliser le fichier `Visitors/JSCodeGenerator.py` pour obtenir le code JavaScript et l'exécuter de votre manière désirée.
 
 ## Étapes de compilation
 
